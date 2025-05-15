@@ -1,0 +1,27 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "twrp_duchamp-eng-99.87.36-SP2A.220405.004-eng.sukrut.20240317.003258-test-keys" ]
+  pull_request:
+    branches: [ "twrp_duchamp-eng-99.87.36-SP2A.220405.004-eng.sukrut.20240317.003258-test-keys" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: configure
+      run: ./configure
+
+    - name: Install dependencies
+      run: make
+
+    - name: Run check
+      run: make check
+
+    - name: Run distcheck
+      run: make distcheck
